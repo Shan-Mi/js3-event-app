@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import EventItem from "../components/EventItem";
 import EventKit from "../data/EventKit";
 
 const EventListPage = () => {
@@ -31,9 +32,8 @@ const EventListPage = () => {
         Go back to homepage
       </button>
       <h1>List page</h1>
-      {eventList && eventList.map(event => (
-        <h4>{event.title}</h4>
-      ))}
+      {eventList &&
+        eventList.map((event) => <EventItem key={event.id} event={event} />)}
     </div>
   );
 };
