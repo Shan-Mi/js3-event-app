@@ -16,7 +16,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={LoginPage} />
           <Route path="/event-list" exact component={EventListPage} />
-          <Route path="/event:slug" exact component={EventDetailPage} />
+          <Route path="/event/:slug" exact component={EventDetailPage} />
         </Switch>
       </UserContext.Provider>
     </div>

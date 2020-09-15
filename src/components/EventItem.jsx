@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // import { BackgroundImgContainer } from "./EventItem.backgroundImg.container";
 
 const EventItem = ({ event }) => {
@@ -6,7 +7,9 @@ const EventItem = ({ event }) => {
 
   return (
     <div>
-      <h3>{title}</h3>
+      <Link to={`event/${slug}`}>
+        <h3>{title}</h3>
+      </Link>
       <h4>{slug}</h4>
       <p>{description}</p>
       <img src={backgroundImage} style={{ width: "20%" }} />
