@@ -7,10 +7,12 @@ import LoginPage from "./pages/LoginPage";
 
 function App() {
   const [token, setToken] = useState(null);
+  const [isDataFetched, setIsDataFetched] = useState(true);
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ token, setToken }}>
+      <UserContext.Provider
+        value={{ token, setToken, isDataFetched, setIsDataFetched }}>
         <Switch>
           <Route path="/" exact component={LoginPage} />
           <Route path="/event-list" exact component={EventListPage} />

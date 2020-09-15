@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 import EventKit from "../data/EventKit";
 
 const LoginForm = () => {
@@ -7,20 +8,32 @@ const LoginForm = () => {
   const eventKit = new EventKit();
   const [email, setEmail] = useState("test.user@willandskill.se");
   const [password, setPassword] = useState("js-lesson-10");
+  const { isDataFetched, setIsDataFetched } = useContext(UserContext);
 
   const login = () => {
     eventKit
       .login(email, password)
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        eventKit.setToken(data.token);
-        history.push("/event-list");
-      });
+      .then(({ token }) => {
+        setIsDataFetched(false);
+        if (token) {
+          eventKit.setToken(token);
+          history.push("/event-list");
+          setIsDataFetched(true);
+        } else {
+          throw new Error(["Wrong Email or Password, pls check"]);
+        }
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
     <div>
+      {!isDataFetched && (
+        <h2>
+          <error>Check your email or password again!</error>
+        </h2>
+      )}
       <div>
         <label htmlFor="email">Email</label>
         <input
@@ -28,7 +41,8 @@ const LoginForm = () => {
           name="email"
           placeholder="jane.doe@company.com"
           value={email}
-          onChange={(e) => setEmail(e.currentTarget.value)}
+          onChange={(e) => setEmail(e.target.value)}
+          // in this case, currentTarge and target are the same.
         />
       </div>
       <div>

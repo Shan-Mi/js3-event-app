@@ -4,11 +4,6 @@ const EVENT_LIST_URL = `${ROOT_URL}events/events/`;
 const EVENT_PAGE_LIST = `${ROOT_URL}cms/{event_slug}/pages`;
 const EVENT_MAIN_PAGE = `${ROOT_URL}cms/{event_slug}/main-page/`;
 
-// Credentials:
-
-// const EMAIL = `test.user@willandskill.se`;
-// const PASSWORD = "js-lesson-10";
-
 export default class {
   login = async (email, password) => {
     const payload = { email, password };
@@ -41,7 +36,7 @@ export default class {
 
   getPublicHeaders() {
     return {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     };
   }
 
