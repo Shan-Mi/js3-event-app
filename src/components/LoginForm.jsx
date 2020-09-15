@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import EventKit from "../data/EventKit";
@@ -18,6 +18,7 @@ const LoginForm = () => {
         setIsDataFetched(false);
         if (token) {
           eventKit.setToken(token);
+          console.log(token)
           history.push("/event-list");
           setIsDataFetched(true);
         } else {
